@@ -8,27 +8,27 @@ void subtree_iter(node *root)
         return;
 
     subtree_iter(root->left);   
-    printf("%c ", (char)root->item);
+    printf(" %c ", (char)root->item);
     subtree_iter(root->right);   
 }
 
 node *subtree_first(node *root)
 {
-    if (root->left != NULL)
+    if (root->left)
         return subtree_first(root->left);
     return root;
 }
 
 node *subtree_last(node *root)
 {
-    if (root->right != NULL)
+    if (root->right)
         return subtree_last(root->right);
     return root;
 }
 
 node *successor(node *root)
 {
-    if (root->right != NULL)
+    if (root->right)
         return subtree_first(root->right);
     while (root->parent && root == root->parent->right)
         root = root->parent;
@@ -37,7 +37,7 @@ node *successor(node *root)
 
 node *predecessor(node *root)
 {
-    if (root->left != NULL)
+    if (root->left)
         return subtree_last(root->left);
     while (root->parent && root == root->parent->left)
         root = root->parent;

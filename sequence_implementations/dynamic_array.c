@@ -10,20 +10,15 @@ typedef struct
 dynamic_array;
 
 dynamic_array *build(int *collection, int n);
-int get_at(int idx); // O(1)
-void set_at(int idx, int value); // O(1)
-void insert_at(int idx, int value); // O(n)
-int delete_at(int idx); // O(n)
+int get_at(int idx);
+void set_at(int idx, int value);
+void insert_at(int idx, int value);
+int delete_at(int idx);
 void delete_sequence();
 void resize();
 void insert_last(int value);
 void delete_last();
 void print_sequence();
-
-// #define insert_first(value) insert_at(0, value) // O(n)
-// #define insert_last(value) insert_at(dynamicArray->size, value) // O(1)a
-// #define delete_first() delete_at(0) // O(n)
-// #define delete_last() delete_at(dynamicArray->size - 1) // O(1)a
 
 dynamic_array *dynamicArray = NULL;
 

@@ -21,15 +21,15 @@ node *subtree_find_next(node *root, char key)
         return NULL;
     if (root->item <= key)
     {
-        if (root->right != NULL)
+        if (root->right)
             return subtree_find_next(root->right, key);
         else
             return NULL;
     }
-    if (root->left != NULL)
+    if (root->left)
     {
         node *next = subtree_find_next(root->left, key);
-        if (next != NULL)
+        if (next)
             return next;
     }
     return root;
@@ -41,15 +41,15 @@ node *subtree_find_previous(node *root, char key)
         return NULL;
     if (root->item >= key)
     {
-        if (root->left != NULL)
+        if (root->left)
             return subtree_find_previous(root->left, key);
         else
             return NULL;
     }
-    if (root->right != NULL)
+    if (root->right)
     {
         node *previous = subtree_find_previous(root->right, key);
-        if (previous != NULL)
+        if (previous)
             return previous;
     }
     return root;
@@ -59,16 +59,21 @@ void subtree_insert(node *root, node *newNode)
 {
     if (newNode->item < root->item)
     {
-        if (root->left != NULL)
+        if (root->left)
             subtree_insert(root->left, newNode);
         else
             subtree_insert_before(root, newNode);
     }
     else if (newNode->item > root->item)
     {
-        if (root->right != NULL)
+        if (root->right)
             subtree_insert(root->right, newNode);
         else
             subtree_insert_after(root, newNode);     
+    }
+    else
+    {
+        // case item is already in the tree
+        free(newNode);
     }
 }

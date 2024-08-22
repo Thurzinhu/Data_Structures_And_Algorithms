@@ -7,6 +7,7 @@
 int main()
 {
     binaryTree *tree = create_binary_tree();
+    
     for (int i = 'Z'; i >= 'A'; i--)
         insert_node(tree, (char)i);
     
@@ -30,6 +31,7 @@ int main()
     delete_node(tree, 'W');
     delete_node(tree, 'F');
     delete_node(tree, 'Y');
+    insert_node(tree, 'Z');
 
     subtree_iter(tree->root);
     printf("\nSize: %i\n", tree->size);
@@ -43,8 +45,11 @@ int main()
         printf("Node before %c: %c\n", key, prev->item);
 
     binaryTree *test = create_binary_tree();
-    test->root = build_from_array("ARTHURANDRADE", 0, 12);
-    
+    char string[] = "INSTUOFEDRALB";
+    int size = sizeof(string)/sizeof(string[0]);
+    test->root = build_from_array(string, 0, size - 1);
+    test->size = size;
+
     subtree_iter(test->root);
     printf("\n");
 

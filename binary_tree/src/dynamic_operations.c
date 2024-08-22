@@ -10,12 +10,14 @@ void subtree_insert_before(node *a, node *b)
     {
         a->left = b;
         b->parent = a;
+        maintain(a);
     }
     else
     {
         node *lastNode = subtree_last(a->left);
         lastNode->right = b;
         b->parent = lastNode;
+        maintain(lastNode);
     }
 }
 
@@ -25,21 +27,23 @@ void subtree_insert_after(node *a, node *b)
     {
         a->right = b;
         b->parent = a;
+        maintain(a);
     }
     else
     {
         node *firstNode = subtree_first(a->right);
         firstNode->left = b;
         b->parent = firstNode;
+        maintain(firstNode);
     }
 }
 
 node *subtree_delete(node *root)
 {
-    if (root->left != NULL || root->right != NULL)
+    if (root->left || root->right)
     {
         node *nodeToBeDeleted;
-        if (root->left != NULL)
+        if (root->left)
             nodeToBeDeleted = predecessor(root);
         else
             nodeToBeDeleted = successor(root);
@@ -48,12 +52,13 @@ node *subtree_delete(node *root)
     }
 
     // case node is a leaf
-    if (root->parent != NULL)
+    if (root->parent)
     {
         if (root->parent->left == root)
             root->parent->left = NULL;
         else
             root->parent->right = NULL;
+        maintain(root->parent);
     }
     
     return root;
@@ -84,13 +89,14 @@ void insert_node(binaryTree *tree, char item)
         tree->root = newNode;
     else
         subtree_insert(tree->root, newNode);
+    determine_new_root(tree);
     tree->size++;
 }
 
 void delete_node(binaryTree *tree, char item)
 {
     node *nodeToBeDeleted = subtree_find(tree->root, item);
-    if (nodeToBeDeleted != NULL)
+    if (nodeToBeDeleted)
     {
         free(subtree_delete(nodeToBeDeleted));
         tree->size--;

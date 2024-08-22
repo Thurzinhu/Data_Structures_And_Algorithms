@@ -16,17 +16,17 @@ typedef struct
 linked_list;
 
 void build(int *collection, int n);
-int get_at(int idx); // O(n)
-void set_at(int idx, int value); // O(n)
+int get_at(int idx);
+void set_at(int idx, int value);
 void insert_at(int idx, int value);
 int delete_at(int idx);
 void delete_sequence();
 node *later_node(node *cur, int idx);
 
-#define insert_first(value) insert_at(0, value) // O(1)
-#define insert_last(value) insert_at(L->size, value) // O(n)
-#define delete_first() delete_at(0) // O(1)
-#define delete_last() delete_at(L->size - 1) // O(n)
+#define insert_first(value) insert_at(0, value)
+#define insert_last(value) insert_at(L->size, value)
+#define delete_first() delete_at(0)
+#define delete_last() delete_at(L->size - 1) 
 #define print_sequence() { for (node *aux = L->head; aux != NULL; aux = aux->next) printf("%i ", aux->item); printf("\n"); }
 
 linked_list *L;
